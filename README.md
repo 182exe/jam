@@ -1,4 +1,2 @@
 # jam
-ALL CREDITS TO navaneethkm004
-
-https://github.com/navaneethkm004/browser-jammer
+gives your browser jam of its choice. it is distracted, so it stops working for you and eats its jam.
