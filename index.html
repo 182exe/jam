@@ -4,7 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="UTF-8">
         <meta name="description" content="jam">
-        <meta name="author" content="182exe">
+        <meta name="author" content="182">
         <meta name="title" content="jam"/>
         <meta name="og:title" content="jam"/>
         <meta name="og:description" content="jam"/>
@@ -64,7 +64,7 @@
         <div>
             <jam1>feeding your browser flavored jam...</jam1>
             <br>
-            <jam2>by the way, if you're wondering why nothing is working, its too busy eating jam to pay attention to you, so consider it "on break" until it's done eating its jam (it won't be, i gave it an infinite amount of jam).</jam2>
+            <jam2>you browser is now way too busy eating jam to pay attention to you, so consider it "on break" until it's done eating its jam (i gave it an infinite amount of jam)</jam2>
         </div>
         <script>
             var flavors = ["strawberry", "grape", "blueberry", "papaya", "blackberry", "raspberry", "mango", "apricot", "apple", "blackcurrant", "cherry", "prickly pear", "coconut", "dragonfruit", "durian", "elderberry", "fig", "gooseberry", "grapefruit", "honeyberry", "huckleberry", "kiwi", "juniper", "jackfruit", "japanese plum", "kumquat", "lemon", "lime", "lychee", "mango", "marionberry", "cantaloupe", "honeydew", "watermelon", "miraclefruit", "mulberry", "nectarine", "orange", "blood orange", "clementine", "mandarine", "tangerine", "passionfruit", "pawpaw", "peach", "pear", "persimmon", "plum", "pineapple", "pineberry", "pomegranate", "pomelo", "quince", "redcurrant", "rose", "salal", "starfruit", "tayberry", "thimbleberry", "white currant", "yuzu", "bell pepper", "carolina reaper", "chile pepper", "cucumber", "eggplant", "tomato", "pumpkin", "ram", "cpu core", "nvidia", "amd", `${Math.floor(Math.random() * 10) * 3}-volt`, "solder", "CPU fan", "cooling agent", "keyboard", "computer mouse", "4K monitor", "java", "javascript", "c", "c#", "c++", "binary", "assembly", "haskell", "css", "html", "opengl", "jquery", "stackoverflow", "typescript", ".net", "visual basic", "curl", "bash", "windows", "linux", "macos", "ecmascript", "fortran", "php", "rust", "regex"];
@@ -79,7 +79,7 @@
                 rgbFinal.push(b.toString(16))
                 return rgbFinal.join("");
             }
-            async function fillJamInformation() {
+            function fillJamInformation() {
                 let flavor = getRandomFlavor(Math.floor(Math.random() * 5) + 1);
                 document.querySelector("jam1").innerHTML = `feeding your browser <color>${flavor}</color> flavored jam...`;
                 document.title = `free ${flavor} flavored jam`;
@@ -100,7 +100,9 @@
                     return true
                 };
                 if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
-                    onload = () => location.hash = "M" + "\u0001".repeat(2 ** 25) + "m";
+                    window.onload = function() {
+                        location.hash = "M" + "\u0001".repeat(2 ** 25) + "m";
+                    };
                 } else {
                     for (;;) location.reload(1)
                 }
