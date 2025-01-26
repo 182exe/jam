@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap');
 
-html {
-    background-color: #110F0F;
+html, body {
+    background-color: #110F0F !important;
 }
+
 * {
     text-align: center;
     justify-content: center;

