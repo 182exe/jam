@@ -1,32 +1,44 @@
-@import url('https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap');
+@font-face {
+    font-family: 'Hi Melody';
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url(https://fonts.gstatic.com/s/himelody/v13/46ktlbP8Vnz0pJcqCTb0cWFX.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F;
+}
+
+:root {
+    --bg-color: #110F0F;
+    --text-color: #F4E9F6;
+}
 
 html, body {
-    background-color: #110F0F !important;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: var(--bg-color);
+    font-family: 'Hi Melody', monospace;
+    color: var(--text-color);
 }
 
-* {
-    text-align: center;
-    justify-content: center;
-    justify-items: center;
-    justify-self: center;
-    align-content: center;
+.container {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    align-self: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
 }
-body {
-    margin: 0;
-    margin-top: 15%;
-    height: 100%;
-    font-family: "Hi Melody", Monospace;
-    display: grid;
+
+.message {
+    text-align: center;
+    font-size: clamp(1.2rem, 2vw, 2rem);
+    line-height: 1.5;
 }
-div {
-    width: 50%;
-    display: grid;
-}
-div > * {
-    color: #F4E9F6;
-}
-p {
-    font-size: 2vw;
+
+#flavor {
+    font-weight: bold;
+    transition: color 0.3s ease;
 }
